@@ -56,12 +56,48 @@ BACKEND:
 ✔ PHP 7.4 ou superior
 ✔ PostgreSQL 12 ou superior
 ✔ Composer (gerenciador de dependências)
-✔ Extensões PHP: pdo_pgsql, pgsql, mbstring, openssl
+✔ Extensões PHP OBRIGATÓRIAS:
+   • pdo_pgsql - Driver PDO para PostgreSQL
+   • pgsql - Extensão PostgreSQL
+   • mbstring - Suporte a caracteres especiais
+   • openssl - Para geração de tokens JWT
 
 FRONTEND:
 ────────
 ✔ Navegador moderno (Chrome, Firefox, Edge)
 ✔ Servidor web (Apache/Nginx) ou PHP built-in server
+
+================================================================================
+                            CONFIGURAÇÃO DO POSTGRESQL
+================================================================================
+
+1️⃣  HABILITAR EXTENSÕES NO PHP (OBRIGATÓRIO)
+────────────────────────────────────────────────
+
+📌 LOCALIZAR O ARQUIVO php.ini:
+────────────────────────────────
+php --ini
+
+📌 EDITAR O ARQUIVO php.ini E DESCOMENTAR:
+────────────────────────────────────────────
+extension=pdo_pgsql
+extension=pgsql
+extension=mbstring
+extension=openssl
+
+📌 CONFIGURAR O PATH DO POSTGRESQL (WINDOWS):
+──────────────────────────────────────────────
+1. Localize a pasta bin do PostgreSQL (ex: C:\Program Files\PostgreSQL\15\bin)
+2. Copie o arquivo libpq.dll desta pasta
+3. Cole na pasta do PHP (ex: C:\php) OU adicione ao PATH do Windows
+
+📌 VERIFICAR SE AS EXTENSÕES ESTÃO CARREGADAS:
+────────────────────────────────────────────────
+php -m | findstr pgsql
+
+Deverá mostrar:
+   pdo_pgsql
+   pgsql
 
 ================================================================================
                             INSTALAÇÃO PASSO A PASSO
@@ -79,15 +115,15 @@ cd infinitIA
 2. Clique com botão direito em "Databases" → "Create" → "Database"
 3. Nome: infinitia
 4. Clique com botão direito no banco "infinitia" → "Query Tool"
-5. Copie e cole TODO o conteúdo do arquivo database.pgsql.sql
-6. Execute
+5. Copie e cole TODO o conteúdo do arquivo database/schema.sql
+6. Execute (tecla F8)
 
 
 3️⃣  CONFIGURAR O BACKEND
 ──────────────────────────
 cd backend
 
-# Instalar dependências do Composer
+# Instalar dependências do Composer (OBRIGATÓRIO!)
 composer install
 
 # Criar arquivo de ambiente
@@ -180,7 +216,7 @@ GET    /api/admin/logs                            # Logs de ações
                             FUNCIONALIDADES
 ================================================================================
 
-COMPLETAS E FUNCIONANDO
+✅ COMPLETAS E FUNCIONANDO
 ──────────────────────────
 ✔ Autenticação JWT - Login/registro com tokens
 ✔ Chat - Mensagens de texto com histórico
@@ -191,12 +227,12 @@ COMPLETAS E FUNCIONANDO
 ✔ Auditoria - Logs de todas as ações admin
 ✔ Rate Limiting - Proteção contra brute force
 
-PARCIALMENTE IMPLEMENTADO
+🔄 PARCIALMENTE IMPLEMENTADO
 ────────────────────────────
 ○ Upload de Mídias - Arquivos são salvos mas não exibidos no frontend
 ○ Gravação de Áudio - Funciona, mas transcrição pendente
 
-EM DESENVOLVIMENTO / FUTURO
+❌ EM DESENVOLVIMENTO / FUTURO
 ──────────────────────────────
 ✘ Integração com IA Real (atualmente usa perguntas simuladas)
 ✘ Gateway de Pagamento (planos de assinatura)
@@ -312,7 +348,7 @@ FLUXO DE PAGAMENTO A IMPLEMENTAR
                             PROBLEMAS CONHECIDOS
 ================================================================================
 
- UPLOAD DE MÍDIAS
+📌 UPLOAD DE MÍDIAS
 ────────────────────
 Problema: Arquivos são salvos no servidor mas não são exibidos no frontend
 
@@ -327,11 +363,17 @@ Solução: Adicionar rota para servir arquivos estáticos no router.php
         }
     }
 
- ESTATÍSTICAS DE DIFICULDADE
+📌 ESTATÍSTICAS DE DIFICULDADE
 ────────────────────────────────
 Problema: Campos de dificuldade (easy_questions, etc) não são preenchidos
 
 Solução: Usar a função updateStatsAfterAnswer completa
+
+📌 ERRO "COULD NOT FIND DRIVER"
+────────────────────────────────
+Problema: Extensões PostgreSQL não habilitadas no PHP
+
+Solução: Siga as instruções da seção "CONFIGURAÇÃO DO POSTGRESQL"
 
 ================================================================================
                             TESTANDO A API COM CURL
@@ -354,3 +396,4 @@ LOGIN ADMIN:
 curl -X POST http://localhost:8080/api/auth/admin-login ^
   -H "Content-Type: application/json" ^
   -d "{\"email\":\"admin@infinitia.com\",\"password\":\"Admin@123\"}"
+
