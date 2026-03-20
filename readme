@@ -18,26 +18,6 @@ para gerar perguntas personalizadas, analisar desempenho e auxiliar no aprendiza
 
 infinitIA/
 │
-├── frontend/                          # Interface do usuário
-│   ├── index.html
-│   ├── Pages/                         # Páginas do sistema
-│   │   ├── login.html
-│   │   ├── CriarConta.html
-│   │   ├── chat.html
-│   │   └── admin.html
-│   ├── Style/                          # Arquivos CSS
-│   │   ├── style.css
-│   │   ├── login.css
-│   │   └── chat.css
-│   ├── Javascript/                      # Scripts do frontend
-│   │   ├── config.js
-│   │   ├── auth.js
-│   │   ├── Chat/
-│   │   │   └── Chat.js
-│   │   └── Admin/
-│   │       └── admin.js
-│   └── Images/                          # Recursos gráficos
-│
 ├── backend/                            # API REST
 │   ├── api/
 │   │   └── index.php                    # Roteador principal
@@ -99,8 +79,8 @@ cd infinitIA
 2. Clique com botão direito em "Databases" → "Create" → "Database"
 3. Nome: infinitia
 4. Clique com botão direito no banco "infinitia" → "Query Tool"
-5. Copie e cole TODO o conteúdo do arquivo database/schema.sql
-6. Execute (tecla F8)
+5. Copie e cole TODO o conteúdo do arquivo database.pgsql.sql
+6. Execute
 
 
 3️⃣  CONFIGURAR O BACKEND
