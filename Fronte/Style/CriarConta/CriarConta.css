@@ -1,0 +1,430 @@
+/* ===== RESET E VARIÁVEIS ===== */
+:root {
+    --primary-color: #008DDA;
+    --primary-gradient: linear-gradient(135deg, #00bfff, #008DDA);
+    --secondary-color: #6c5ce7;
+    --dark-bg: #0a0a0a;
+    --card-bg: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --border-color: #222222;
+    --error-color: #d63031;
+    --success-color: #00b894;
+    --warning-color: #f39c12;
+    
+    --border-radius: 12px;
+    --border-radius-lg: 20px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Fundo com efeito */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(0, 141, 218, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* ===== CONTAINER PRINCIPAL ===== */
+.signup-container {
+    width: 100%;
+    max-width: 520px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== CARD DE CADASTRO ===== */
+.signup-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.5s ease;
+    position: relative;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.back-btn:hover {
+    color: var(--primary-color);
+    transform: translateX(-5px);
+}
+
+/* ===== HEADER DO CADASTRO ===== */
+.signup-header {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.signup-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.signup-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ===== FORMULÁRIO ===== */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(0, 141, 218, 0.1);
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.input-group input.error {
+    border-color: var(--error-color);
+}
+
+/* ===== WRAPPER DE SENHA ===== */
+.password-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+/* ===== MEDIDOR DE FORÇA DA SENHA ===== */
+.password-strength {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.strength-bar {
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-bar.weak {
+    width: 33.33%;
+    background-color: var(--error-color);
+}
+
+.strength-bar.medium {
+    width: 66.66%;
+    background-color: var(--warning-color);
+}
+
+.strength-bar.strong {
+    width: 100%;
+    background-color: var(--success-color);
+}
+
+/* ===== MENSAGENS DE ERRO ===== */
+.error-message {
+    color: var(--error-color);
+    font-size: 0.85rem;
+    min-height: 20px;
+}
+
+/* ===== GRUPO DE TERMOS ===== */
+.terms-group {
+    margin: 10px 0;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.terms-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--primary-color);
+}
+
+.terms-checkbox a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.terms-checkbox a:hover {
+    text-decoration: underline;
+}
+
+/* ===== BOTÃO DE CADASTRO ===== */
+.signup-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(0, 141, 218, 0.3);
+}
+
+.signup-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 141, 218, 0.4);
+}
+
+.signup-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ===== LINK PARA LOGIN ===== */
+.login-link {
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.login-link p {
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.login-redirect-btn {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.login-redirect-btn:hover {
+    border-color: var(--primary-color);
+    background: rgba(0, 141, 218, 0.1);
+}
+
+/* ===== LOADING OVERLAY ===== */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-overlay.hidden {
+    display: none;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-overlay p {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+/* ===== TOAST NOTIFICATION ===== */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 15px 25px;
+    color: var(--text-primary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+    z-index: 1100;
+    max-width: 400px;
+}
+
+.toast.success {
+    border-left: 4px solid var(--success-color);
+}
+
+.toast.error {
+    border-left: 4px solid var(--error-color);
+}
+
+.toast.hidden {
+    display: none;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 480px) {
+    .signup-card {
+        padding: 30px 20px;
+    }
+
+    .signup-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .back-btn {
+        top: 10px;
+        left: 10px;
+    }
+}
+
+/* ===== ANIMAÇÕES ADICIONAIS ===== */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.3s ease;
+}

@@ -1,0 +1,376 @@
+# INFINITIA - PLATAFORMA DE ESTUDOS COM IA
+
+================================================================================
+                            INFORMAÇÕES GERAIS
+================================================================================
+
+InfinitIA é uma plataforma completa de estudos que utiliza Inteligência Artificial 
+para gerar perguntas personalizadas, analisar desempenho e auxiliar no aprendizado.
+
+🔹 Frontend: HTML/CSS/JavaScript puro
+🔹 Backend: PHP 7.4+ com arquitetura MVC
+🔹 Banco de Dados: PostgreSQL 12+
+🔹 Autenticação: JWT (JSON Web Tokens)
+
+================================================================================
+                            ESTRUTURA DE PASTAS
+================================================================================
+
+infinitIA/
+│
+├── frontend/                          # Interface do usuário
+│   ├── index.html
+│   ├── Pages/                         # Páginas do sistema
+│   │   ├── login.html
+│   │   ├── CriarConta.html
+│   │   ├── chat.html
+│   │   └── admin.html
+│   ├── Style/                          # Arquivos CSS
+│   │   ├── style.css
+│   │   ├── login.css
+│   │   └── chat.css
+│   ├── Javascript/                      # Scripts do frontend
+│   │   ├── config.js
+│   │   ├── auth.js
+│   │   ├── Chat/
+│   │   │   └── Chat.js
+│   │   └── Admin/
+│   │       └── admin.js
+│   └── Images/                          # Recursos gráficos
+│
+├── backend/                            # API REST
+│   ├── api/
+│   │   └── index.php                    # Roteador principal
+│   ├── app/
+│   │   ├── controllers/                  # Controladores
+│   │   │   ├── AuthController.php
+│   │   │   ├── ChatController.php
+│   │   │   └── AdminController.php
+│   │   ├── models/                       # Modelos
+│   │   ├── middlewares/                   # Middlewares
+│   │   │   └── AuthMiddleware.php
+│   │   └── helpers/                       # Classes auxiliares
+│   │       ├── Database.php
+│   │       ├── JWT.php
+│   │       └── Response.php
+│   ├── config/                           # Configurações
+│   │   └── database.php
+│   ├── logs/                              # Logs do sistema
+│   ├── uploads/                            # Arquivos enviados
+│   ├── .env.example
+│   ├── .htaccess
+│   ├── router.php
+│   └── composer.json
+│
+├── database/                             # Scripts SQL
+│   └── schema.sql                         # Estrutura completa do banco
+│
+└── README.md                              # Este arquivo
+
+================================================================================
+                            REQUISITOS DO SISTEMA
+================================================================================
+
+BACKEND:
+───────
+✔ PHP 7.4 ou superior
+✔ PostgreSQL 12 ou superior
+✔ Composer (gerenciador de dependências)
+✔ Extensões PHP: pdo_pgsql, pgsql, mbstring, openssl
+
+FRONTEND:
+────────
+✔ Navegador moderno (Chrome, Firefox, Edge)
+✔ Servidor web (Apache/Nginx) ou PHP built-in server
+
+================================================================================
+                            INSTALAÇÃO PASSO A PASSO
+================================================================================
+
+1️⃣  CLONAR O REPOSITÓRIO
+──────────────────────────
+git clone https://github.com/seu-usuario/infinitIA.git
+cd infinitIA
+
+
+2️⃣  CONFIGURAR O BANCO DE DADOS (VIA PGADMIN)
+────────────────────────────────────────────────
+1. Abra o pgAdmin
+2. Clique com botão direito em "Databases" → "Create" → "Database"
+3. Nome: infinitia
+4. Clique com botão direito no banco "infinitia" → "Query Tool"
+5. Copie e cole TODO o conteúdo do arquivo database/schema.sql
+6. Execute (tecla F8)
+
+
+3️⃣  CONFIGURAR O BACKEND
+──────────────────────────
+cd backend
+
+# Instalar dependências do Composer
+composer install
+
+# Criar arquivo de ambiente
+cp .env.example .env
+
+# Editar o arquivo .env com suas configurações
+# (use nano, vim ou qualquer editor de texto)
+nano .env
+
+
+4️⃣  ARQUIVO .env (exemplo com suas configurações)
+────────────────────────────────────────────────────
+# App
+APP_NAME=InfinitIA
+APP_ENV=development
+APP_DEBUG=true
+APP_URL=http://localhost:8080
+
+# Database PostgreSQL
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=infinitia
+DB_USER=postgres
+DB_PASS=SUA_SENHA_AQUI
+DB_SCHEMA=public
+
+# JWT (troque para uma chave forte!)
+JWT_SECRET=minha_chave_super_secreta_2026
+JWT_EXPIRATION=86400
+
+# Admin (credenciais fixas - troque a senha!)
+ADMIN_EMAIL=admin@infinitia.com
+ADMIN_PASSWORD=Admin@123
+
+
+5️⃣  INICIAR O SERVIDOR BACKEND
+──────────────────────────────────
+# Ainda na pasta backend
+php -S localhost:8080 router.php
+
+# O servidor estará disponível em: http://localhost:8080
+
+
+6️⃣  INICIAR O SERVIDOR FRONTEND
+──────────────────────────────────
+# Em outro terminal, vá para a pasta frontend
+cd frontend
+
+# Servidor simples (opcional)
+php -S localhost:3000
+
+# Ou configure no Apache/Nginx apontando para a pasta frontend/
+
+================================================================================
+                            ENDPOINTS DA API
+================================================================================
+
+AUTENTICAÇÃO PÚBLICA
+────────────────────
+POST   /api/auth/register        # Registro de usuário
+POST   /api/auth/login            # Login de usuário
+POST   /api/auth/admin-login       # Login de admin
+GET    /api/auth/verify            # Verifica token
+
+CHAT (PROTEGIDO - REQUER TOKEN)
+────────────────────────────────
+GET    /api/chat/conversations              # Lista conversas
+POST   /api/chat/conversations              # Nova conversa
+POST   /api/chat/messages                    # Envia mensagem
+GET    /api/chat/messages/{id}               # Mensagens da conversa
+POST   /api/chat/upload                       # Upload de arquivo
+POST   /api/chat/generate-quiz                # Gera perguntas
+POST   /api/chat/submit-answer                 # Envia resposta
+GET    /api/chat/stats                         # Estatísticas do usuário
+
+ADMIN (PROTEGIDO - REQUER TOKEN ADMIN)
+──────────────────────────────────────
+GET    /api/admin/dashboard                    # Dashboard
+GET    /api/admin/users                         # Lista usuários
+GET    /api/admin/users/{id}                    # Detalhes do usuário
+POST   /api/admin/users                          # Cria usuário
+PUT    /api/admin/users/{id}                     # Atualiza usuário
+PATCH  /api/admin/users/{id}/status               # Altera status
+DELETE /api/admin/users/{id}                      # Exclui usuário
+GET    /api/admin/mensagens                       # Lista mensagens
+GET    /api/admin/midias                          # Lista mídias
+GET    /api/admin/logs                            # Logs de ações
+
+================================================================================
+                            FUNCIONALIDADES
+================================================================================
+
+COMPLETAS E FUNCIONANDO
+──────────────────────────
+✔ Autenticação JWT - Login/registro com tokens
+✔ Chat - Mensagens de texto com histórico
+✔ Upload de Arquivos - Imagens e áudios (armazenamento)
+✔ Quiz - Geração de perguntas baseada em estatísticas
+✔ Estatísticas - Dashboard do usuário com gráficos
+✔ Painel Admin - CRUD completo de usuários
+✔ Auditoria - Logs de todas as ações admin
+✔ Rate Limiting - Proteção contra brute force
+
+PARCIALMENTE IMPLEMENTADO
+────────────────────────────
+○ Upload de Mídias - Arquivos são salvos mas não exibidos no frontend
+○ Gravação de Áudio - Funciona, mas transcrição pendente
+
+EM DESENVOLVIMENTO / FUTURO
+──────────────────────────────
+✘ Integração com IA Real (atualmente usa perguntas simuladas)
+✘ Gateway de Pagamento (planos de assinatura)
+✘ WebSockets (chat em tempo real)
+✘ Notificações Push (alertas e lembretes)
+✘ App Mobile (versão React Native)
+
+================================================================================
+                            INTEGRAÇÃO COM IA (PRÓXIMOS PASSOS)
+================================================================================
+
+O sistema está preparado para receber integração com IAs reais.
+Atualmente usa dados simulados nos seguintes pontos:
+
+1️⃣  GERAÇÃO DE PERGUNTAS
+──────────────────────────
+Arquivo: backend/app/controllers/ChatController.php
+Função: generateQuestions()
+
+Como integrar:
+    $iaResponse = $this->callAIService([
+        'action' => 'generate_questions',
+        'user_id' => $userId,
+        'weaknesses' => $weaknesses,
+        'quantity' => $quantity
+    ]);
+
+2️⃣  RESPOSTAS DO CHAT
+──────────────────────
+Arquivo: backend/app/controllers/ChatController.php
+Função: generateIAResponse()
+
+Sugestões de serviços:
+    • OpenAI GPT - Para respostas contextualizadas
+    • Google Gemini - Alternativa gratuita
+    • Claude API - Para análises profundas
+    • Modelo próprio - Fine-tuning com dados do usuário
+
+3️⃣  ANÁLISE DE ÁUDIO
+──────────────────────
+Arquivo: backend/app/controllers/ChatController.php
+Função: uploadFile()
+
+Opções de transcrição:
+    • Google Speech-to-Text
+    • Whisper API (OpenAI)
+    • AssemblyAI
+
+4️⃣  ANÁLISE DE IMAGENS
+────────────────────────
+Opções:
+    • Google Vision API
+    • AWS Rekognition
+    • Azure Computer Vision
+
+
+EXEMPLO DE INTEGRAÇÃO COM OPENAI:
+──────────────────────────────────
+private function callOpenAI($prompt) {
+    $ch = curl_init('https://api.openai.com/v1/chat/completions');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $_ENV['OPENAI_API_KEY']
+    ]);
+    
+    $data = [
+        'model' => 'gpt-3.5-turbo',
+        'messages' => [
+            ['role' => 'system', 'content' => 'Você é um assistente de estudos.'],
+            ['role' => 'user', 'content' => $prompt]
+        ]
+    ];
+    
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    return json_decode($response, true);
+}
+
+================================================================================
+                            GATEWAY DE PAGAMENTO (ROADMAP)
+================================================================================
+
+O sistema está preparado para receber integração com gateways de pagamento:
+
+ESTRUTURA NO BANCO (A IMPLEMENTAR)
+───────────────────────────────────
+Tabela subscriptions:
+    • plan (VARCHAR)
+    • status (VARCHAR)
+    • payment_method (VARCHAR)
+    • expires_at (TIMESTAMP)
+
+OPÇÕES DE GATEWAY
+─────────────────
+    • Stripe - Internacional, documentação excelente
+    • PagSeguro - Brasileiro, parcelamento
+    • Mercado Pago - Latino-americano
+    • Asaas - Brasileiro, boletos
+
+FLUXO DE PAGAMENTO A IMPLEMENTAR
+─────────────────────────────────
+1. Usuário escolhe plano na interface
+2. Backend gera checkout no gateway
+3. Webhook recebe confirmação
+4. Atualiza status da assinatura no banco
+5. Libera funcionalidades premium
+
+================================================================================
+                            PROBLEMAS CONHECIDOS
+================================================================================
+
+ UPLOAD DE MÍDIAS
+────────────────────
+Problema: Arquivos são salvos no servidor mas não são exibidos no frontend
+
+Solução: Adicionar rota para servir arquivos estáticos no router.php
+
+    if (preg_match('/^\/uploads\/(.+)$/', $uri, $matches)) {
+        $file = __DIR__ . '/uploads/' . $matches[1];
+        if (file_exists($file)) {
+            header('Content-Type: ' . mime_content_type($file));
+            readfile($file);
+            exit;
+        }
+    }
+
+ ESTATÍSTICAS DE DIFICULDADE
+────────────────────────────────
+Problema: Campos de dificuldade (easy_questions, etc) não são preenchidos
+
+Solução: Usar a função updateStatsAfterAnswer completa
+
+================================================================================
+                            TESTANDO A API COM CURL
+================================================================================
+
+REGISTRAR USUÁRIO:
+──────────────────
+curl -X POST http://localhost:8080/api/auth/register ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"João Silva\",\"email\":\"joao@email.com\",\"password\":\"123456\"}"
+
+LOGIN USUÁRIO:
+──────────────
+curl -X POST http://localhost:8080/api/auth/login ^
+  -H "Content-Type: application/json" ^
+  -d "{\"email\":\"joao@email.com\",\"password\":\"123456\"}"
+
+LOGIN ADMIN:
+────────────
+curl -X POST http://localhost:8080/api/auth/admin-login ^
+  -H "Content-Type: application/json" ^
+  -d "{\"email\":\"admin@infinitia.com\",\"password\":\"Admin@123\"}"

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/Images/infinity.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat InfinitIA | Assistente Inteligente</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Style/Chat/Chat.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <img src="/Images/infinity.svg" alt="InfinitIA">
+                    <span>InfinitIA</span>
+                </div>
+            </div>
+            
+            <div class="header-center">
+                <span class="model-badge">
+                    
+                    Modelo: IA Adaptativa v2.0
+                </span>
+            </div>
+            
+            <div class="header-right">
+                <button class="header-btn" id="newChatBtn" title="Nova conversa">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="header-btn" id="userMenuBtn" title="Menu do usuário">
+                    <i class="fas fa-user-circle"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="chat-main">
+            <!-- Sidebar Menu -->
+            <aside class="chat-sidebar" id="sidebar">
+                <nav class="sidebar-nav">
+                    <div class="nav-section">
+                        <h3>Menu Principal</h3>
+                        <ul>
+                            <li class="active" data-view="chat">
+                                <a href="#chat">
+                                    <i class="fas fa-comment"></i>
+                                    <span>Conversar com Agente</span>
+                                </a>
+                            </li>
+                            <li data-view="questions">
+                                <a href="#questions">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span>Perguntas Geradas</span>
+                                    <span class="badge" id="questionsBadge">5</span>
+                                </a>
+                            </li>
+                            <li data-view="stats">
+                                <a href="#stats">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Estatísticas</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-section">
+                        <h3>Histórico</h3>
+                        <ul class="history-list" id="historyList">
+                            <!-- Histórico será carregado via JS -->
+                            <li class="loading-history">
+                                <a href="#">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <span>Carregando...</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-footer">
+                        <button class="nav-footer-btn" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sair</span>
+                        </button>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="chat-content" id="mainContent">
+                <!-- Loading State -->
+                <div class="loading-state hidden" id="loadingState">
+                    <div class="spinner"></div>
+                    <p id="loadingMessage">Carregando perguntas personalizadas...</p>
+                </div>
+
+                <!-- Chat View (Padrão) -->
+                <div class="content-view active" id="chatView">
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Mensagens serão inseridas aqui -->
+                        <div class="message welcome-message">
+                            <div class="message-avatar">
+                                <img src="/Images/infinity.svg" alt="IA">
+                            </div>
+                            <div class="message-content">
+                                <p>Olá! Sou seu assistente de estudos. Como posso ajudar hoje?</p>
+                                <p>Posso gerar perguntas personalizadas, explicar conceitos ou ajudar com suas dúvidas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <!-- Área de Input com Gravação de Áudio -->
+                        <div class="input-wrapper">
+                            <div class="attach-buttons">
+                                <button class="attach-btn" id="imageAttachBtn" title="Enviar imagem">
+                                    <i class="fas fa-image"></i>
+                                    <input type="file" id="imageInput" accept="image/*" style="display: none">
+                                </button>
+                                
+                                <!-- Botão de Gravação de Áudio -->
+                                <button class="attach-btn" id="audioRecordBtn" title="Gravar áudio">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                                
+                                <button class="attach-btn" id="fileAttachBtn" title="Enviar arquivo">
+                                    <i class="fas fa-paperclip"></i>
+                                    <input type="file" id="fileInput" style="display: none">
+                                </button>
+                            </div>
+                            
+                            <textarea 
+                                id="userInput" 
+                                placeholder="Digite sua mensagem ou grave um áudio..." 
+                                rows="1"
+                                aria-label="Mensagem"
+                            ></textarea>
+                            
+                            <button class="send-btn" id="sendMessageBtn" aria-label="Enviar mensagem">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+
+                        <!-- Preview de Anexos (imagem/arquivo) -->
+                        <div id="attachmentPreview" class="attachment-preview hidden">
+                            <div class="preview-content">
+                                <i class="fas fa-file"></i>
+                                <span id="previewFileName"></span>
+                                <button class="remove-attachment" id="removeAttachmentBtn">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Gravador de Áudio -->
+                        <div id="audioRecorder" class="audio-recorder hidden">
+                            <div class="recorder-content">
+                                <div class="recorder-visualizer">
+                                    <canvas id="audioVisualizer" width="200" height="40"></canvas>
+                                </div>
+                                <div class="recorder-timer" id="recorderTimer">00:00</div>
+                                <div class="recorder-controls">
+                                    <button class="recorder-btn" id="cancelRecordingBtn" title="Cancelar">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    <button class="recorder-btn record" id="startRecordingBtn" title="Começar gravação">
+                                        <i class="fas fa-circle"></i>
+                                    </button>
+                                    <button class="recorder-btn pause hidden" id="pauseRecordingBtn" title="Pausar">
+                                        <i class="fas fa-pause"></i>
+                                    </button>
+                                    <button class="recorder-btn stop hidden" id="stopRecordingBtn" title="Parar">
+                                        <i class="fas fa-stop"></i>
+                                    </button>
+                                    <button class="recorder-btn play hidden" id="playRecordingBtn" title="Ouvir">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <button class="recorder-btn send" id="sendRecordingBtn" title="Enviar áudio">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Player de Áudio (oculto) -->
+                        <audio id="audioPlayer" style="display: none;"></audio>
+                        <div class="input-footer">
+                            <span>Pressione Enter para enviar, Shift+Enter para nova linha</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions View -->
+                <div class="content-view" id="questionsView">
+                    <div class="questions-header">
+                        <button class="refresh-questions" id="refreshQuestions">
+                            <i class="fas fa-sync-alt"></i>
+                            Gerar Novas Perguntas
+                        </button>
+                    </div>
+
+                    <div class="questions-grid" id="questionsGrid">
+                        <!-- Cards de perguntas serão inseridos via JS -->
+                        <div class="questions-placeholder">
+                            <p>Clique em "Gerar Novas Perguntas" para começar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics View -->
+                <div class="content-view" id="statsView">
+                    <h2>Estatísticas de Aprendizado</h2>
+                    
+                    <div class="stats-grid">
+                        <!-- Card Progresso Geral -->
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <i class="fas fa-chart-pie"></i>
+                                <h3>Progresso Geral</h3>
+                            </div>
+                            <div class="stat-content">
+                                <div class="progress-circle" data-progress="75">
+                                    <span>75%</span>
+                                </div>
+                                <p>75% das metas alcançadas</p>
+                            </div>
+                        </div>
+
+                        <!-- Card Desempenho por Matéria -->
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <i class="fas fa-brain"></i>
+                                <h3>Desempenho por Área</h3>
+                            </div>
+                            <div class="subject-bars">
+                                <div class="subject-bar">
+                                    <span>Matemática</span>
+                                    <div class="bar">
+                                        <div class="bar-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span>85%</span>
+                                </div>
+                                <div class="subject-bar">
+                                    <span>Português</span>
+                                    <div class="bar">
+                                        <div class="bar-fill" style="width: 70%"></div>
+                                    </div>
+                                    <span>70%</span>
+                                </div>
+                                <div class="subject-bar">
+                                    <span>Ciências</span>
+                                    <div class="bar">
+                                        <div class="bar-fill" style="width: 92%"></div>
+                                    </div>
+                                    <span>92%</span>
+                                </div>
+                                <div class="subject-bar">
+                                    <span>História</span>
+                                    <div class="bar">
+                                        <div class="bar-fill" style="width: 65%"></div>
+                                    </div>
+                                    <span>65%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Tempo de Estudo -->
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <i class="fas fa-clock"></i>
+                                <h3>Tempo de Estudo</h3>
+                            </div>
+                            <div class="time-stats">
+                                <div class="time-item">
+                                    <span class="time-label">Hoje</span>
+                                    <span class="time-value">2h 30m</span>
+                                </div>
+                                <div class="time-item">
+                                    <span class="time-label">Esta semana</span>
+                                    <span class="time-value">15h 45m</span>
+                                </div>
+                                <div class="time-item">
+                                    <span class="time-label">Total</span>
+                                    <span class="time-value">47h 20m</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Pontos Fortes/Fracos -->
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <i class="fas fa-trophy"></i>
+                                <h3>Pontos Fortes</h3>
+                            </div>
+                            <ul class="strengths-list">
+                                <li><i class="fas fa-check-circle"></i> Raciocínio lógico</li>
+                                <li><i class="fas fa-check-circle"></i> Interpretação de texto</li>
+                                <li><i class="fas fa-check-circle"></i> Fórmulas matemáticas</li>
+                            </ul>
+                            <h4>Precisa melhorar</h4>
+                            <ul class="weaknesses-list">
+                                <li><i class="fas fa-exclamation-circle"></i> Gramática avançada</li>
+                                <li><i class="fas fa-exclamation-circle"></i> Datas históricas</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Evolução -->
+                    <div class="evolution-chart">
+                        <h3>Evolução do Aprendizado</h3>
+                        <div class="chart-placeholder">
+                            <!-- Aqui você pode adicionar uma biblioteca de gráficos depois -->
+                            <div class="mock-chart">
+                                <div class="chart-bar" style="height: 60px;"></div>
+                                <div class="chart-bar" style="height: 75px;"></div>
+                                <div class="chart-bar" style="height: 70px;"></div>
+                                <div class="chart-bar" style="height: 85px;"></div>
+                                <div class="chart-bar" style="height: 80px;"></div>
+                                <div class="chart-bar" style="height: 95px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="chat-footer">
+            <p>© 2026 InfinitIA - Assistente Inteligente para Estudos. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Modal de Resposta -->
+    <div id="answerModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Resultado da Pergunta</h3>
+                <button class="modal-close" id="closeModalBtn" aria-label="Fechar">&times;</button>
+            </div>
+            <div class="modal-body" id="answerModalBody">
+                <!-- Conteúdo do modal será inserido via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de notificação (opcional) -->
+    <div id="toast" class="toast hidden">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="../Javascript/Chat/Chat.js"></script>
+</body>
+</html>

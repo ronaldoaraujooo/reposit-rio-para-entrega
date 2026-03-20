@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Infinite I.A</title>
+    <link rel="icon" href="/Images/infinity.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../Style/LoginInicial/Login.css">
+</head>
+<body>
+    <div class="login-container">
+        <!-- Card de Login -->
+        <div class="login-card">
+            <!-- Logo e Título -->
+            <div class="login-header">
+                <img src="../Images/infinity.svg" alt="InfinitIA Logo" class="logo">
+                <h1>Bem-vindo à InfinitIA</h1>
+                <p>Faça login para acessar sua conta</p>
+            </div>
+
+            <!-- Opções de Tipo de Login -->
+            <div class="login-type-toggle">
+                <button id="normalLoginBtn" class="type-btn active">Usuário Normal</button>
+                <button id="adminLoginBtn" class="type-btn">Administrador</button>
+            </div>
+
+            <!-- Formulário de Login Normal -->
+            <form id="normalLoginForm" class="login-form active">
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="seu@email.com" 
+                        required
+                    >
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="••••••" 
+                        required
+                    >
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember"> Lembrar-me
+                    </label>
+                    <a href="#" class="forgot-password" onclick="redirectTo('/Pages/RecuperarSenha.html')">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" class="login-btn" id="submitNormalLogin">
+                    Entrar
+                </button>
+            </form>
+
+            <!-- Formulário de Login Admin (redireciona direto) -->
+            <form id="adminLoginForm" class="login-form">
+                <div class="admin-message">
+                    <img src="../Images/ia.svg" alt="Admin" class="admin-icon">
+                    <p>Área restrita para administradores</p>
+                </div>
+                <button type="button" class="login-btn admin-btn" id="adminRedirectBtn">
+                    Acessar como Administrador
+                </button>
+            </form>
+
+            <!-- Link para Criar Conta -->
+            <div class="signup-link">
+                <p>Não tem uma conta?</p>
+                <button onclick="redirectTo('/Pages/CriarConta.html')" class="signup-btn">
+                    Criar conta gratuita
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading Overlay (escondido inicialmente) -->
+        <div id="loadingOverlay" class="loading-overlay hidden">
+            <div class="loading-spinner"></div>
+            <p>Autenticando...</p>
+        </div>
+    </div>
+
+    <script src="../Javascript/LoginInicial/Login.js"></script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../Style/Dashboard/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-crown"></i>
+                    <span>CMS Admin</span>
+                </div>
+            </div>
+            
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div>
+                    <div class="user-name">Carregando...</div>
+                    <div class="user-role">Administrador</div>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item active" data-section="dashboard">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Dashboard</span>
+                    </li>
+                    <li class="nav-item" data-section="usuarios">
+                        <i class="fas fa-users"></i>
+                        <span>Usuários</span>
+                    </li>
+                    <li class="nav-item" data-section="mensagens">
+                        <i class="fas fa-envelope"></i>
+                        <span>Mensagens</span>
+                    </li>
+                    <li class="nav-item" data-section="midias">
+                        <i class="fas fa-images"></i>
+                        <span>Mídias</span>
+                    </li>
+                    <li class="nav-item" data-section="assinaturas">
+                        <i class="fas fa-crown"></i>
+                        <span>Assinaturas</span>
+                    </li>
+                    <li class="nav-item" data-section="configuracoes">
+                        <i class="fas fa-cog"></i>
+                        <span>Configurações</span>
+                    </li>
+                    <li class="nav-item logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Sair</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <!-- Header -->
+            <header class="content-header">
+                <div class="header-left">
+                    <h1>Dashboard</h1>
+                    <div class="header-date">
+                        <i class="far fa-calendar-alt"></i>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar usuários...">
+                    </div>
+                    
+                    <div class="header-actions">
+                        <button class="btn-refresh" title="Atualizar">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content-body">
+                <section id="dashboard" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Total de Usuários</span>
+                                <span class="stat-value">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Respostas Hoje</span>
+                                <span class="stat-value">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Mensagens Hoje</span>
+                                <span class="stat-value">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Usuários Ativos</span>
+                                <span class="stat-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-grid">
+                        <div class="recent-card">
+                            <div class="card-header">
+                                <h3>Usuários Recentes</h3>
+                                <a href="#" onclick="toggleSection('usuarios', event)">Ver todos</a>
+                            </div>
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Email</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" class="empty-table">Carregando...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="recent-card">
+                            <div class="card-header">
+                                <h3>Atividades Recentes</h3>
+                                <a href="#">Ver todas</a>
+                            </div>
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Usuário</th>
+                                            <th>Ação</th>
+                                            <th>Data</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" class="empty-table">Carregando...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="usuarios" class="content-section">
+                    <div class="section-header">
+                        <h2>Gerenciar Usuários</h2>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Papel</th>
+                                    <th>Plano</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="7" class="empty-table">Carregando usuários...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="mensagens" class="content-section">
+                    <div class="section-header">
+                        <h2>Todas as Mensagens</h2>
+                    </div>
+                    <div class="empty-state">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <p>Funcionalidade em desenvolvimento</p>
+                    </div>
+                </section>
+
+                <section id="midias" class="content-section">
+                    <div class="section-header">
+                        <h2>Biblioteca de Mídias</h2>
+                    </div>
+                    <div class="empty-state">
+                        <i class="fas fa-images"></i>
+                        <p>Funcionalidade em desenvolvimento</p>
+                    </div>
+                </section>
+
+                <section id="assinaturas" class="content-section">
+                    <div class="section-header">
+                        <h2>Gerenciar Assinaturas</h2>
+                    </div>
+                    <div class="empty-state">
+                        <i class="fas fa-crown"></i>
+                        <p>Funcionalidade em desenvolvimento</p>
+                    </div>
+                </section>
+
+                <section id="configuracoes" class="content-section">
+                    <div class="section-header">
+                        <h2>Configurações do Sistema</h2>
+                    </div>
+                    <div class="empty-state">
+                        <i class="fas fa-cog"></i>
+                        <p>Funcionalidade em desenvolvimento</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification -->
+    <div class="admin-notification"></div>
+
+    <script src="../../Javascript/Admin/dashbord.js"></script>
+</body>
+</html>

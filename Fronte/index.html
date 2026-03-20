@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InfinitIA | Estudos com Inteligência Artificial</title>
+    <link rel="icon" href="/Images/infinity.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/Style/style.css" />
+    <link rel="stylesheet" href="/Style/loading.css" />
+    <link rel="stylesheet" href="/Style/require.css" />
+</head>
+
+<body>
+    <header id="header">
+        <nav>
+            <div id="logo">
+                <img src="/Images/infinity.svg" alt="InfinitIA Logo" />
+                <span>InfinitIA</span>
+            </div>
+            
+            <div id="headerActions">
+                <button id="loginHeaderBtn" class="btn-outline" onclick="redirectTo('/Pages/login.html')">Entrar</button>
+                <button id="signupHeaderBtn" class="btn-primary" onclick="redirectTo('/Pages/CriarConta.html')">Criar conta</button>
+                <button id="menuBtn" class="btn-icon">
+                    <img src="/Images/menu.svg" alt="Menu" />
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- LOADING -->
+        <section id="process" class="hidden">
+            <div class="loading-content">
+                <!-- Brand -->
+                <div class="brand">
+                    <img src="/Images/infinity.svg" alt="InfinitIA" class="brand-icon" />
+                    <span class="brand-name">InfinitIA</span>
+                </div>
+                
+                <!-- Loading Indicator -->
+                <div class="loading-indicator">
+                    <div class="spinner"></div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="bar"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span>Inicializando...</span>
+                        <span id="percent">0%</span>
+                    </div>
+                </div>
+                
+                <!-- Status -->
+                <div class="status-container">
+                    <div id="status">Preparando ambiente<span class="dots"></span></div>
+                </div>
+                
+                <!-- Mensagem do sistema -->
+                <div class="system-message">v2.0.1 • build 2026.3</div>
+            </div>
+        </section>
+        <!-- HERO SECTION -->
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Potencialize seus estudos com a InfinitIA</h1>
+                <p>
+                    Acesse ferramentas inteligentes que inspiram, organizam e 
+                    impulsionam seus estudos com IA adaptativa.
+                </p>
+                
+                <div class="hero-buttons">
+                    <button class="btn-primary btn-large" onclick="redirectTo('/Pages/login.html')">
+                        Começar Grátis
+                    </button>
+                    <button class="btn-outline btn-large" onclick="redirectTo('/Pages/Detalhes.html')">
+                        Saber Mais
+                    </button>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <img src="Images/infinity.svg" alt="InfinitIA Illustration" />
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION -->
+        <section id="features">
+            <h2>Ferramentas potencializadas por Inteligência Artificial</h2>
+            <p class="section-subtitle">
+                Descubra como a InfinitIA pode revolucionar seu aprendizado
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="/Images/ia.svg" alt="IA" />
+                    </div>
+                    <h3>Estudos Personalizados</h3>
+                    <p>
+                        Receba dicas adaptadas para seu estilo de estudo, tudo 
+                        selecionado inteligentemente por IA
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="/Images/bulb.svg" alt="Progresso" />
+                    </div>
+                    <h3>Progresso Acadêmico</h3>
+                    <p>
+                        Monitore seu progresso de forma personalizada e 
+                        impulsione seu desenvolvimento
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="/Images/star.svg" alt="Criatividade" />
+                    </div>
+                    <h3>Criatividade Ampliada</h3>
+                    <p>
+                        Explore novos métodos e desenvolva seu lado criativo 
+                        com ferramentas inovadoras
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="/Images/book.svg" alt="Anotações" />
+                    </div>
+                    <h3>Anotações Inteligentes</h3>
+                    <p>
+                        Histórico de pesquisa inteligente para consultar 
+                        tudo que você estudou
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING SECTION -->
+        <section id="pricing">
+            
+            <p class="section-subtitle">
+                Escolha o plano ideal e revolucione seus estudos com IA
+            </p>
+
+            <div class="pricing-toggle">
+                <button id="monthlyBtn" class="toggle-btn active">Mensal</button>
+                <button id="yearlyBtn" class="toggle-btn">Anual </button>
+            </div>
+
+            <div id="monthlyPlans" class="pricing-grid active">
+                <!-- Planos Mensais -->
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">Grátis</div>
+                    <ul class="features-list">
+                        <li class="available">Ferramenta básica de IA</li>
+                        <li class="available">10 questões gratuitas/mês</li>
+                        <li class="unavailable">Histórico de estudo</li>
+                        <li class="unavailable">Análise profunda com IA</li>
+                        <li class="unavailable">Suporte prioritário</li>
+                    </ul>
+                    <button class="btn-outline btn-block" onclick="redirectTo('/Pages/Pagamento.html?plano=basic&tipo=mensal')">
+                        Começar Grátis
+                    </button>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Mais popular</div>
+                    <h3>Plus</h3>
+                    <div class="price">R$ 29,99 <span>/mês</span></div>
+                    <ul class="features-list">
+                        <li class="available">Ferramentas intermediárias de IA</li>
+                        <li class="available">200 consultas/mês</li>
+                        <li class="available">Histórico de estudo</li>
+                        <li class="available">Análise profunda com IA</li>
+                        <li class="unavailable">Suporte prioritário</li>
+                    </ul>
+                    <button class="btn-primary btn-block" onclick="redirectTo('/Pages/Pagamento.html?plano=plus&tipo=mensal&valor=29.99')">
+                        Assinar Plus
+                    </button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Premium</h3>
+                    <div class="price">R$ 69,99 <span>/mês</span></div>
+                    <ul class="features-list">
+                        <li class="available">Ferramentas avançadas de IA</li>
+                        <li class="available">Consultas ilimitadas</li>
+                        <li class="available">Histórico de estudo</li>
+                        <li class="available">Análise profunda com IA</li>
+                        <li class="available">Suporte prioritário</li>
+                    </ul>
+                    <button class="btn-primary btn-block" onclick="redirectTo('/Pages/Pagamento.html?plano=premium&tipo=mensal&valor=69.99')">
+                        Assinar Premium
+                    </button>
+                </div>
+            </div>
+
+            <div id="yearlyPlans" class="pricing-grid hidden">
+                <!-- Planos Anuais -->
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">Grátis</div>
+                    <ul class="features-list">
+                        <li class="available">Ferramenta básica de IA</li>
+                        <li class="available">120 questões/ano</li>
+                        <li class="unavailable">Histórico de estudo</li>
+                        <li class="unavailable">Análise profunda com IA</li>
+                        <li class="unavailable">Suporte prioritário</li>
+                    </ul>
+                    <button class="btn-outline btn-block" onclick="redirectTo('/Pages/Pagamento.html?plano=basic&tipo=anual')">
+                        Começar Grátis
+                    </button>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Melhor custo-benefício</div>
+                    <h3>Plus Anual</h3>
+                    <div class="price">R$ 287,90 <span>/ano</span></div>
+                    <div class="price-detail">equivalente a R$ 23,99/mês</div>
+                    <ul class="features-list">
+                        <li class="available">Ferramentas intermediárias de IA</li>
+                        <li class="available">2.400 consultas/ano</li>
+                        <li class="available">Histórico de estudo</li>
+                        <li class="available">Análise profunda com IA</li>
+                        <li class="available">Suporte prioritário</li>
+                        <li class="available special">2 meses grátis</li>
+                    </ul>
+                    <button class="btn-primary btn-block" onclick="redirectTo('/Pages/Pagamento.html?plano=plus&tipo=anual&valor=287.90&economia=20')">
+                        Assinar Plus Anual
+                    </button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Premium Anual</h3>
+                    <div class="price">R$ 671,90 <span>/ano</span></div>
+                    <div class="price-detail">equivalente a R$ 55,99/mês</div>
+                    <ul class="features-list">
+                        <li class="available">Ferramentas avançadas de IA</li>
+                        <li class="available">Consultas ilimitadas</li>
+                        <li class="available">Histórico de estudo</li>
+                        <li class="available">Análise profunda com IA</li>
+                        <li class="available">Suporte prioritário 24/7</li>
+                        <li class="available special">2 meses grátis + bônus exclusivo</li>
+                    </ul>
+                    <button class="btn-primary btn-block" onclick="redirectTo('/Pages/Pagamento.html?plano=premium&tipo=anual&valor=671.90&economia=20')">
+                        Assinar Premium Anual
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA SECTION -->
+        <aside id="cta">
+            <div class="cta-content">
+                <h2>Pronto para impulsionar seus estudos?</h2>
+                <p>
+                    Junte-se a milhares de estudantes que já estão aproveitando 
+                    o poder da InfinitIA
+                </p>
+                <button class="btn-primary btn-large" onclick="redirectTo('/Pages/login.html')">
+                    Começar grátis agora
+                </button>
+            </div>
+        </aside>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="/Images/infinity.svg" alt="InfinitIA" />
+                <h3>InfinitIA</h3>
+            </div>
+            
+            <p>
+                Otimizando, transformando e impulsionando seus estudos 
+                com Inteligência Artificial
+            </p>
+            
+            <div class="footer-links">
+                <button class="footer-link" onclick="redirectTo('/Pages/login.html')">Entrar</button>
+                <button class="footer-link" onclick="redirectTo('/Pages/CriarConta.html')">Criar conta</button>
+                <button class="footer-link" onclick="redirectTo('/Pages/Termos.html')">Termos</button>
+                <button class="footer-link" onclick="redirectTo('/Pages/Privacidade.html')">Privacidade</button>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2026 InfinitIA - Todos os direitos reservados
+            </div>
+        </div>
+    </footer>
+    <div id="optionsModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Acesse sua conta</h2>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            
+            <!-- Versão mobile mas pode modificar se quiser, fiz por quê não estava funcionando o menu original -->
+            <div class="modal-body">
+                <div class="auth-options">
+                    <button class="auth-option-btn" onclick="redirectTo('/Pages/login.html')">
+                        <img src="/Images/person_add.svg" alt="" />
+                        <span>Já tenho conta</span>
+                    </button>
+                    
+                    <button class="auth-option-btn" onclick="redirectTo('/Pages/CriarConta.html')">
+                        <img src="/Images/person_add.svg" alt="" />
+                        <span>Criar nova conta</span>
+                    </button>
+                </div>
+                
+                
+                <div class="mobile-auth-header">
+                    <button class="mobile-login-btn" onclick="redirectTo('/Pages/login.html')">
+                        <span>Entrar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Configuração dos redirecionamentos
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+        
+        // Elementos do DOM
+        const menuBtn = document.getElementById('menuBtn');
+        const optionsModal = document.getElementById('optionsModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const learnMoreBtn = document.getElementById('learnMoreBtn');
+        
+        // Função para mostrar modal
+        function showModal() {
+            optionsModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Função para esconder modal
+        function hideModal() {
+            optionsModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        // Botão do menu abre modal
+        if (menuBtn) {
+            menuBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                showModal();
+            });
+        }
+        
+        // Fechar modal
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', hideModal);
+        }
+        
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === optionsModal) {
+                hideModal();
+            }
+        });
+        
+        // Botão "Saber Mais" - Redireciona para Detalhes
+        if (learnMoreBtn) {
+            learnMoreBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                redirectTo('/Pages/Detalhes.html');
+            });
+        }
+        
+        // Toggle entre planos mensal/anual
+        const monthlyBtn = document.getElementById('monthlyBtn');
+        const yearlyBtn = document.getElementById('yearlyBtn');
+        const monthlyPlans = document.getElementById('monthlyPlans');
+        const yearlyPlans = document.getElementById('yearlyPlans');
+
+        if (monthlyBtn && yearlyBtn && monthlyPlans && yearlyPlans) {
+            monthlyBtn.addEventListener('click', () => {
+                monthlyBtn.classList.add('active');
+                yearlyBtn.classList.remove('active');
+                monthlyPlans.classList.remove('hidden');
+                monthlyPlans.classList.add('active');
+                yearlyPlans.classList.add('hidden');
+                yearlyPlans.classList.remove('active');
+            });
+            
+            yearlyBtn.addEventListener('click', () => {
+                yearlyBtn.classList.add('active');
+                monthlyBtn.classList.remove('active');
+                yearlyPlans.classList.remove('hidden');
+                yearlyPlans.classList.add('active');
+                monthlyPlans.classList.add('hidden');
+                monthlyPlans.classList.remove('active');
+            });
+        }
+        
+        // Previne comportamento padrão de links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => e.preventDefault());
+        });
+        
+        // Função de loading 
+        function showLoading() {
+            document.getElementById('process').classList.remove('hidden');
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                document.getElementById('percent').textContent = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        document.getElementById('process').classList.add('hidden');
+                    }, 500);
+                }
+            }, 200);
+        }
+
+        
+    function showLoading() {
+        const loadingSection = document.getElementById('process');
+        const percentElement = document.getElementById('percent');
+        const barElement = document.getElementById('bar');
+        const statusElement = document.getElementById('status');
+        
+        // Mostrar loading
+        loadingSection.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        
+        let progress = 0;
+        
+        const interval = setInterval(() => {
+            if (progress < 95) {
+                progress += Math.random() * 3; // Incremento aleatório para parecer mais natural
+                if (progress > 95) progress = 95;
+                
+                barElement.style.width = progress + '%';
+                percentElement.textContent = Math.floor(progress) + '%';
+            }
+            
+            // Mudar status de vez em quando
+            if (Math.random() < 0.1) {
+                const messages = [
+                    "Processando...",
+                    "Quase lá...",
+                    "Preparando ambiente...",
+                    "Carregando recursos..."
+                ];
+                statusElement.textContent = messages[Math.floor(Math.random() * messages.length)];
+            }
+        }, 200);
+        
+        // Função para esconder o loading
+        window.hideLoading = function() {
+            clearInterval(interval);
+            progress = 100;
+            barElement.style.width = '100%';
+            percentElement.textContent = '100%';
+            statusElement.textContent = 'Pronto!';
+            
+            setTimeout(() => {
+                loadingSection.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 1000);
+        };
+        
+
+            setTimeout(hideLoading, 5000);
+        }
+
+        // Mostrar loading ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            setTimeout(showLoading, 100);
+            
+            
+            setTimeout(() => {
+                if (window.hideLoading) window.hideLoading();
+            }, 5000); // olha , você vai poder mudar o tempo aqui
+        });
+
+        
+        document.querySelectorAll('button[onclick*="redirectTo"], a').forEach(element => {
+            element.addEventListener('click', function(e) {
+                if (!this.id.includes('menu') && !this.id.includes('close')) {
+                    showLoading();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

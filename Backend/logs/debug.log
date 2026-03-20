@@ -1,0 +1,48 @@
+[2026-03-20 01:57:54] --- updateAIProfile para user 4 ---
+[2026-03-20 01:57:54] Categorias encontradas: 1
+[2026-03-20 01:57:54] Strengths: []
+[2026-03-20 01:57:54] Weaknesses: []
+[2026-03-20 01:57:54] AvgHitRate: 100, TotalQuestions: 1
+[2026-03-20 01:57:54] Inserindo novo perfil
+[2026-03-20 01:57:54] INSERT AI params: [4,"[]","[]",100,"1"]
+[2026-03-20 01:57:54] updateAIProfile OK
+[2026-03-20 01:58:06] --- updateAIProfile para user 4 ---
+[2026-03-20 01:58:06] Categorias encontradas: 2
+[2026-03-20 01:58:06] Strengths: []
+[2026-03-20 01:58:06] Weaknesses: []
+[2026-03-20 01:58:06] AvgHitRate: 100, TotalQuestions: 2
+[2026-03-20 01:58:06] Atualizando perfil existente
+[2026-03-20 01:58:06] UPDATE AI params: ["[]","[]",100,"2",4]
+[2026-03-20 01:58:06] updateAIProfile OK
+[2026-03-20 01:58:16] --- updateAIProfile para user 4 ---
+[2026-03-20 01:58:16] Categorias encontradas: 2
+[2026-03-20 01:58:16] Strengths: []
+[2026-03-20 01:58:16] Weaknesses: []
+[2026-03-20 01:58:16] AvgHitRate: 100, TotalQuestions: 3
+[2026-03-20 01:58:16] Atualizando perfil existente
+[2026-03-20 01:58:16] UPDATE AI params: ["[]","[]",100,"3",4]
+[2026-03-20 01:58:17] updateAIProfile OK
+[2026-03-20 01:58:25] --- updateAIProfile para user 4 ---
+[2026-03-20 01:58:25] Categorias encontradas: 2
+[2026-03-20 01:58:25] Strengths: []
+[2026-03-20 01:58:25] Weaknesses: []
+[2026-03-20 01:58:25] AvgHitRate: 75, TotalQuestions: 4
+[2026-03-20 01:58:25] Atualizando perfil existente
+[2026-03-20 01:58:25] UPDATE AI params: ["[]","[]",75,"4",4]
+[2026-03-20 01:58:25] updateAIProfile OK
+[2026-03-20 01:58:41] --- updateAIProfile para user 4 ---
+[2026-03-20 01:58:41] Categorias encontradas: 2
+[2026-03-20 01:58:42] Strengths: [{"category":"Matem\u00e1tica","hit_rate":100}]
+[2026-03-20 01:58:42] Weaknesses: []
+[2026-03-20 01:58:42] AvgHitRate: 75, TotalQuestions: 5
+[2026-03-20 01:58:42] Atualizando perfil existente
+[2026-03-20 01:58:42] UPDATE AI params: ["[{\"category\":\"Matem\\u00e1tica\",\"hit_rate\":100}]","[]",75,"5",4]
+[2026-03-20 01:58:42] updateAIProfile OK
+[2026-03-20 02:12:29] --- updateAIProfile para user 4 ---
+[2026-03-20 02:12:29] Categorias encontradas: 2
+[2026-03-20 02:12:29] Strengths: [{"category":"Matem\u00e1tica","hit_rate":75}]
+[2026-03-20 02:12:29] Weaknesses: []
+[2026-03-20 02:12:29] AvgHitRate: 62.5, TotalQuestions: 6
+[2026-03-20 02:12:29] Atualizando perfil existente
+[2026-03-20 02:12:29] UPDATE AI params: ["[{\"category\":\"Matem\\u00e1tica\",\"hit_rate\":75}]","[]",62.5,"6",4]
+[2026-03-20 02:12:29] updateAIProfile OK
