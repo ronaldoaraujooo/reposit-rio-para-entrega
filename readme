@@ -39,11 +39,10 @@ infinitIA/
 │   ├── uploads/                            # Arquivos enviados
 │   ├── .env.example
 │   ├── .htaccess
-│   ├── router.php
+│   |__ database.pgsql.sql
+|   ├── router.php
 │   └── composer.json
-│
-├── database/                             # Scripts SQL
-│   └── schema.sql                         # Estrutura completa do banco
+│                         # Estrutura completa do banco
 │
 └── README.md                              # Este arquivo
 
@@ -115,8 +114,8 @@ cd infinitIA
 2. Clique com botão direito em "Databases" → "Create" → "Database"
 3. Nome: infinitia
 4. Clique com botão direito no banco "infinitia" → "Query Tool"
-5. Copie e cole TODO o conteúdo do arquivo database/schema.sql
-6. Execute (tecla F8)
+5. Copie e cole TODO o conteúdo do arquivo database.pgsql.sql
+6. Execute 
 
 
 3️⃣  CONFIGURAR O BACKEND
