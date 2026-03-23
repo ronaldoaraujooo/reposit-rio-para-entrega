@@ -46,3 +46,19 @@
 [2026-03-20 02:12:29] Atualizando perfil existente
 [2026-03-20 02:12:29] UPDATE AI params: ["[{\"category\":\"Matem\\u00e1tica\",\"hit_rate\":75}]","[]",62.5,"6",4]
 [2026-03-20 02:12:29] updateAIProfile OK
+[2026-03-23 21:50:41] --- updateAIProfile para user 8 ---
+[2026-03-23 21:50:41] Categorias encontradas: 1
+[2026-03-23 21:50:41] Strengths: []
+[2026-03-23 21:50:41] Weaknesses: []
+[2026-03-23 21:50:41] AvgHitRate: 0, TotalQuestions: 1
+[2026-03-23 21:50:41] Inserindo novo perfil
+[2026-03-23 21:50:41] INSERT AI params: [8,"[]","[]",0,"1"]
+[2026-03-23 21:50:41] updateAIProfile OK
+[2026-03-23 21:52:24] --- updateAIProfile para user 8 ---
+[2026-03-23 21:52:24] Categorias encontradas: 2
+[2026-03-23 21:52:24] Strengths: []
+[2026-03-23 21:52:24] Weaknesses: []
+[2026-03-23 21:52:24] AvgHitRate: 50, TotalQuestions: 2
+[2026-03-23 21:52:24] Atualizando perfil existente
+[2026-03-23 21:52:24] UPDATE AI params: ["[]","[]",50,"2",8]
+[2026-03-23 21:52:24] updateAIProfile OK
